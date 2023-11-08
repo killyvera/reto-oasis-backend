@@ -25,9 +25,7 @@ export const TestConection = async () => {
   }
 };
 
-const models = {
+export const models = {
   desert: require("./desert")(sequelize, Sequelize.DataTypes),
   oasis: require("./oasis")(sequelize, Sequelize.DataTypes),
 };
-
-console.log(models.desert, models.oasis);
