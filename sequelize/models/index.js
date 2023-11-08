@@ -1,8 +1,8 @@
-import { Sequelize } from "sequelize";
+const Sequelize = require("sequelize");
 const path = require("path");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: './.env' })
+dotenv.config({ path: "./.env" });
 
 export const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -24,3 +24,10 @@ export const TestConection = async () => {
     await sequelize.close();
   }
 };
+
+const models = {
+  desert: require("./desert")(sequelize, Sequelize.DataTypes),
+  oasis: require("./oasis")(sequelize, Sequelize.DataTypes),
+};
+
+console.log(models.desert, models.oasis);
