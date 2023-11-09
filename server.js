@@ -1,4 +1,8 @@
 // Import necessary modules
+import resolvers from "./graphQL/resolvers/resolvers";
+import { typeDefs } from "./graphQL/typeDefs/typeDefs";
+
+
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 
@@ -23,18 +27,18 @@ const initializeDatabase = async () => {
 // Function to initialize the Apollo Server
 const initializeServer = async () => {
   // Define GraphQL schema
-  const typeDefs = gql`
-    type Query {
-      hello: String
-    }
-  `;
+//   const typeDefs = gql`
+//     type Query {
+//       hello: String
+//     }
+//   `;
 
-  // Define resolvers for the schema
-  const resolvers = {
-    Query: {
-      hello: () => "Hello Oasis",
-    },
-  };
+//   // Define resolvers for the schema
+//   const resolvers = {
+//     Query: {
+//       hello: () => "Hello Oasis",
+//     },
+//   };
 
   // Create a new Apollo Server instance
   const server = new ApolloServer({ typeDefs, resolvers, context: { models } });

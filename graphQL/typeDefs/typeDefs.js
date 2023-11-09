@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server-express");
+import GraphQLJSON from "graphql-type-json";
+export const typeDefs = gql`
+  scalar JSON
 
-const typeDefs = gql`
   type Desert {
     id: ID!
     name: String
