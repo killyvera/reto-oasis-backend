@@ -15,7 +15,7 @@ export const sequelize = new Sequelize(
 );
 
 const models = {
-  desert: require("./desert")(sequelize, Sequelize.DataTypes),
-  oasis: require("./oasis")(sequelize, Sequelize.DataTypes),
+  desert: require("./models").Desert,
+  oasis: require("./models").Oasis,
 };
 export default models;

@@ -4,14 +4,21 @@ import models from "../../sequelize/models";
 module.exports = {
   Query: {
     deserts: async () => {
-      console.log(models, "desert resolver");
-      return await models.desert.findAll();
+      console.log(models, "--------------");
+      return await models.desert.findAll({
+        include: [models.oasis],
+      });
     },
     desert: async (_, { id }) => {
       return await models.desert.findByPk(id);
     },
     oases: async () => {
-      return await models.oasis.findAll();
+      const oasises = await models.oasis.findAll();
+      return oasises.map((oasis) => ({
+        ...oasis.toJSON(),
+        createdAt: formatDate(oasis.createdAt),
+        updatedAt: formatDate(oasis.createdAt),
+      }));
     },
     oasis: async (_, { id }) => {
       return await models.oasis.findByPk(id);
@@ -19,17 +26,17 @@ module.exports = {
   },
   Mutation: {
     createDesert: async (_, { input }) => {
-      return await Desert.create(input);
+      return await models.desert.create(input);
     },
     updateDesert: async (_, { id, input }) => {
-      const desert = await Desert.findByPk(id);
+      const desert = await models.desert.findByPk(id);
       if (!desert) {
         throw new Error("Desert not found");
       }
       return await desert.update(input);
     },
     deleteDesert: async (_, { id }) => {
-      const desert = await Desert.findByPk(id);
+      const desert = await models.desert.findByPk(id);
       if (!desert) {
         throw new Error("Desert not found");
       }
@@ -37,17 +44,17 @@ module.exports = {
       return desert;
     },
     createOasis: async (_, { input }) => {
-      return await Oasis.create(input);
+      return await models.oasis.create(input);
     },
     updateOasis: async (_, { id, input }) => {
-      const oasis = await Oasis.findByPk(id);
+      const oasis = await models.oasis.findByPk(id);
       if (!oasis) {
         throw new Error("Oasis not found");
       }
       return await oasis.update(input);
     },
     deleteOasis: async (_, { id }) => {
-      const oasis = await Oasis.findByPk(id);
+      const oasis = await models.oasis.findByPk(id);
       if (!oasis) {
         throw new Error("Oasis not found");
       }
@@ -70,4 +77,9 @@ module.exports = {
       return GraphQLJSON.parseValue(value);
     },
   },
+};
+
+// Helper function to format dates
+const formatDate = (date) => {
+  return date.toISOString();
 };
