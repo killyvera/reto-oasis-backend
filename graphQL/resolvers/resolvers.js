@@ -1,5 +1,5 @@
 const { GraphQLJSON } = require("graphql-type-json");
-import models from "../../sequelize/models";
+const { default: models } = require("../../sequelize/models");
 
 module.exports = {
   Query: {

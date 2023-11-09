@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
+const sequelize = require("./index").sequelize;
 
-import { sequelize } from "./index";
-
-const DataTypes = Sequelize.DataTypes
+const DataTypes = Sequelize.DataTypes;
 
 const Desert = sequelize.define(
   "Desert",

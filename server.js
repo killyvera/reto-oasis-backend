@@ -1,7 +1,8 @@
 // Import necessary modules
-import resolvers from "./graphQL/resolvers/resolvers";
-import { typeDefs } from "./graphQL/typeDefs/typeDefs";
-import { sequelize } from "./sequelize/models/index";
+const resolvers = require("./graphQL/resolvers/resolvers");
+const { typeDefs } = require("./graphQL/typeDefs/typeDefs");
+const { sequelize } = require("./sequelize/models/index");
+const serverles = require("serverless-http");
 
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
@@ -26,6 +27,9 @@ const initializeDatabase = async () => {
   }
 };
 
+// Create a new Express app
+const app = express();
+
 // Function to initialize the Apollo Server
 const initializeServer = async () => {
   const server = new ApolloServer({
@@ -35,11 +39,8 @@ const initializeServer = async () => {
       return { models };
     },
   });
-  console.log('Apollo ON')
+  console.log("Apollo ON");
   //   const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
-
-  // Create a new Express app
-  const app = express();
 
   // Start the Apollo Server and apply middleware
   await server.start();
@@ -55,3 +56,4 @@ const initializeServer = async () => {
 initializeDatabase().then(() => {
   initializeServer();
 });
+module.exports.handler = serverles(app);
