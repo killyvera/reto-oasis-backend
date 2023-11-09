@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: "./.env" });
 
-export const sequelize = new Sequelize(
+const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
@@ -13,8 +13,9 @@ export const sequelize = new Sequelize(
   }
 );
 
-const models = {
-  desert: require("./models").Desert,
-  oasis: require("./models").Oasis,
+const models = require("./models")
+
+module.exports = {
+  sequelize,
+  models,
 };
-export default models;

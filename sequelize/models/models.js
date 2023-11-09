@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("./index").sequelize;
+const sequelize = require("../sequelizeConector");
 
 const DataTypes = Sequelize.DataTypes;
 
@@ -77,6 +77,6 @@ Desert.hasMany(Oasis);
 Oasis.belongsTo(Desert);
 
 module.exports = {
-  Desert,
-  Oasis,
+  desert: Desert,
+  oasis: Oasis,
 };

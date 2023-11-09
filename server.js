@@ -1,7 +1,6 @@
 // Import necessary modules
 const resolvers = require("./graphQL/resolvers/resolvers");
 const { typeDefs } = require("./graphQL/typeDefs/typeDefs");
-const { sequelize } = require("./sequelize/models/index");
 const serverles = require("serverless-http");
 
 const express = require("express");
