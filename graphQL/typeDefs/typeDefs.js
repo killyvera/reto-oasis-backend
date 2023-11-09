@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server-express");
-import GraphQLJSON from "graphql-type-json";
+
 export const typeDefs = gql`
   scalar JSON
 

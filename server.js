@@ -1,10 +1,10 @@
 // Import necessary modules
 import resolvers from "./graphQL/resolvers/resolvers";
 import { typeDefs } from "./graphQL/typeDefs/typeDefs";
-
+import { sequelize } from "./sequelize/models/index";
 
 const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 
 // Import models
 const models = require("./sequelize/models/index");
@@ -14,34 +14,29 @@ const initializeDatabase = async () => {
   try {
     // Authenticate to the database
     await models.sequelize.authenticate();
+    console.log(models + "------------------------auth OK");
     console.log("Successfully authenticated to the database");
 
     // Sync the database
     await models.sequelize.sync();
     console.log("Database synced successfully");
   } catch (error) {
+    console.log(models + "------------------------auth FAIL");
     console.error("Unable to connect to the database:", error);
   }
 };
 
 // Function to initialize the Apollo Server
 const initializeServer = async () => {
-  // Define GraphQL schema
-//   const typeDefs = gql`
-//     type Query {
-//       hello: String
-//     }
-//   `;
-
-//   // Define resolvers for the schema
-//   const resolvers = {
-//     Query: {
-//       hello: () => "Hello Oasis",
-//     },
-//   };
-
-  // Create a new Apollo Server instance
-  const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: () => {
+      return { models };
+    },
+  });
+  console.log('Apollo ON')
+  //   const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
 
   // Create a new Express app
   const app = express();

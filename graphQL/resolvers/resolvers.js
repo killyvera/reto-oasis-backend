@@ -1,19 +1,20 @@
-import { Desert, Oasis } from "../../sequelize/models";
-const { GraphQLJSON, GraphQLJSONObject } = require("graphql-type-json");
+const { GraphQLJSON } = require("graphql-type-json");
+import models from "../../sequelize/models";
 
 module.exports = {
   Query: {
     deserts: async () => {
-      return await Desert.findAll();
+      console.log(models, "desert resolver");
+      return await models.desert.findAll();
     },
     desert: async (_, { id }) => {
-      return await Desert.findByPk(id);
+      return await models.desert.findByPk(id);
     },
     oases: async () => {
-      return await Oasis.findAll();
+      return await models.oasis.findAll();
     },
     oasis: async (_, { id }) => {
-      return await Oasis.findByPk(id);
+      return await models.oasis.findByPk(id);
     },
   },
   Mutation: {
