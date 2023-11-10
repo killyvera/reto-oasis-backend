@@ -46,9 +46,9 @@ const initializeServer = async () => {
   server.applyMiddleware({ app });
 
   // Start the Express server
-  // app.listen({ port: 5000 }, () => {
-  //   console.log("Server started at http://localhost:5000" + server.graphqlPath);
-  // });
+  app.listen({ port: 5000 }, () => {
+    console.log("Server started at http://localhost:5000" + server.graphqlPath);
+  });
 };
 
 // Initialize the database and server
