@@ -1,10 +1,10 @@
 const { GraphQLJSON } = require("graphql-type-json");
-const { default: models } = require("../../sequelize/models");
-
+const sequelize = require("../../sequelize/models");
+const models = sequelize.models;
 module.exports = {
   Query: {
     deserts: async () => {
-      console.log(models, "--------------");
+      console.log("--------------", models.models, "--------------");
       return await models.desert.findAll({
         include: [models.oasis],
       });

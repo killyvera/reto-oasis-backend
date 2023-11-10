@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
-
+  Desert.associate = function (models) {
+    Desert.hasMany(models.Oasis);
+  };
   return Desert;
 };

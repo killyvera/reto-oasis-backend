@@ -1,7 +1,6 @@
 // Import necessary modules
 const resolvers = require("./graphQL/resolvers/resolvers");
 const { typeDefs } = require("./graphQL/typeDefs/typeDefs");
-const { sequelize } = require("./sequelize/models/index");
 const serverles = require("serverless-http");
 
 const express = require("express");
@@ -47,9 +46,9 @@ const initializeServer = async () => {
   server.applyMiddleware({ app });
 
   // Start the Express server
-  app.listen({ port: 5000 }, () => {
-    console.log("Server started at http://localhost:5000" + server.graphqlPath);
-  });
+  // app.listen({ port: 5000 }, () => {
+  //   console.log("Server started at http://localhost:5000" + server.graphqlPath);
+  // });
 };
 
 // Initialize the database and server
