@@ -8,12 +8,12 @@ const { ApolloServer } = require("apollo-server-express");
 
 // Import models
 const models = require("./sequelize/models/index");
-
+const sequelize = require("./sequelize/sequelizeConector");
 // Function to initialize the database connection
 const initializeDatabase = async () => {
   try {
     // Authenticate to the database
-    await models.sequelize.authenticate();
+    await sequelize.authenticate();
     console.log("Successfully authenticated to the database");
 
     // Sync the database
@@ -49,7 +49,12 @@ const initializeServer = async () => {
         process.env.SERVER_PORT +
         server.graphqlPath
     );
-    console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_HOST, process.env.DB_PASS)
+    console.log(
+      process.env.DB_NAME,
+      process.env.DB_USER,
+      process.env.DB_HOST,
+      process.env.DB_PASS
+    );
   });
 };
 
