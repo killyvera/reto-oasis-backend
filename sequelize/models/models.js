@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
+const sequelize = require("../sequelizeConector");
 
-import { sequelize } from "./index";
-
-const DataTypes = Sequelize.DataTypes
+const DataTypes = Sequelize.DataTypes;
 
 const Desert = sequelize.define(
   "Desert",
@@ -78,6 +77,6 @@ Desert.hasMany(Oasis);
 Oasis.belongsTo(Desert);
 
 module.exports = {
-  Desert,
-  Oasis,
+  desert: Desert,
+  oasis: Oasis,
 };
