@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-express");
 
-export const typeDefs = gql`
+const typeDefs = gql`
   scalar JSON
 
   type Desert {
@@ -51,3 +51,4 @@ export const typeDefs = gql`
     deleteOasis(id: ID!): Oasis
   }
 `;
+module.exports = { typeDefs };

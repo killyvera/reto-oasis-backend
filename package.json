@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon server.js --ext js,graphql --exec babel-node"
+    "dev": "nodemon server.js --ext js,graphql --exec babel-node",
+    "start": "node server.js"
   },
   "author": "david.esmeralda@gmail.com",
   "license": "ISC",

@@ -14,20 +14,20 @@ const initializeDatabase = async () => {
   try {
     // Authenticate to the database
     await models.sequelize.authenticate();
-    console.log(models + "------------------------auth OK");
     console.log("Successfully authenticated to the database");
 
     // Sync the database
     await models.sequelize.sync();
     console.log("Database synced successfully");
   } catch (error) {
-    console.log(models + "------------------------auth FAIL");
     console.error("Unable to connect to the database:", error);
   }
 };
 
 // Create a new Express app
 const app = express();
+
+app.get("/", (req, res) => res.send("{Oasis graph api challenge}"));
 
 // Function to initialize the Apollo Server
 const initializeServer = async () => {
@@ -38,16 +38,17 @@ const initializeServer = async () => {
       return { models };
     },
   });
-  console.log("Apollo ON");
-  //   const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
-
   // Start the Apollo Server and apply middleware
   await server.start();
   server.applyMiddleware({ app });
-
+  app.use("*", (req, res) => res.send("{404 no encotrado.}"));
   // Start the Express server
-  app.listen({ port: 5000 }, () => {
-    console.log("Server started at http://localhost:5000" + server.graphqlPath);
+  app.listen({ port: process.env.SERVER_PORT }, () => {
+    console.log(
+      "Server started at http://localhost:" +
+        process.env.SERVER_PORT +
+        server.graphqlPath
+    );
   });
 };
 
