@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const dotenv = require("dotenv");
-
+const mysql2 = require("mysql2");
 dotenv.config({ path: "./.env" });
 
 const sequelize = new Sequelize(
@@ -11,6 +11,7 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     host: process.env.DB_HOST,
     port: 3306,
+    
   }
 );
 
